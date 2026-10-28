@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LLM-Integrated Robotic Control | Miles Morrison</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">Miles Morrison</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <nav id="nav">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">&#9680;</button>
+    </nav>
+  </header>
+
+  <main class="project-page">
+    <a class="back" href="index.html#projects">&larr; All projects</a>
+    <h1>LLM-Integrated Robotic Control</h1>
+    <p class="meta">Independent Study &middot; Lafayette College &middot; 2024</p>
+    <img class="project-hero" src="assets/placeholder.svg" alt="" />
+
+    <h2>Overview</h2>
+    <p>An end-to-end Webots control simulation that turns natural-language food orders into 7-DoF robotic arm motion to prepare the food.</p>
+
+    <h2>Approach</h2>
+    <ul>
+      <li>Built an LLM-integrated finite state machine that selects ingredients and parameterizes the sequence, timing, and duration of reusable manipulation and cooking behaviors.</li>
+      <li>Kept the behaviors modular so one set of primitives can compose many different dishes.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <ul>
+      <li>Demonstrated generalized cooking ability through zero-shot testing on varied order requests and dishes.</li>
+    </ul>
+
+    <ul class="tags"><li>LLMs</li><li>Robotic Arm</li><li>FSM</li><li>Webots</li></ul>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Miles Morrison</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strawberry Harvesting Simulation | Miles Morrison</title>
+  <meta name="description" content="A configurable Webots simulation architecture for testing robotic strawberry harvesting strategies and end effectors before physical prototyping." />
+  <meta property="og:title" content="Simulation Architecture for Tunable Strawberry Harvesting Experiments" />
+  <meta property="og:image" content="assets/strawberry/thumb.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">Miles Morrison</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <nav id="nav">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">&#9680;</button>
+    </nav>
+  </header>
+
+  <main class="project-page">
+    <a class="back" href="index.html#projects">&larr; All projects</a>
+    <h1>Simulation Architecture for Tunable Strawberry Harvesting Experiments</h1>
+    <p class="meta">Robotics Course Final Project &middot; Lafayette College &middot; Spring 2026 &middot; Webots</p>
+
+    <p class="lead">A configurable simulation testbed for comparing robotic strawberry harvesting strategies and end effectors before anyone builds a physical prototype.</p>
+
+    <div class="cta">
+      <a class="btn primary" href="assets/strawberry/poster.pdf">View poster (PDF, 24 MB)</a>
+    </div>
+
+    <figure class="figure">
+      <img src="assets/strawberry/sim-field.jpg" alt="Simulated strawberry plant with flowers and two berries hanging over a raised bed in Webots" />
+      <figcaption>The simulated crop environment: a strawberry plant over a raised bed, with fruit on flexible stems.</figcaption>
+    </figure>
+
+    <div class="glance">
+      <div><strong>4</strong><span>configurable subsystems</span></div>
+      <div><strong>100</strong><span>force sensors on the berry</span></div>
+      <div><strong>11.9 s &rarr; 1.0 s</strong><span>settling time as damping rises</span></div>
+      <div><strong>26.6 mm</strong><span>less fruit sag from higher stiffness</span></div>
+    </div>
+
+    <h2>The problem</h2>
+    <p>Strawberry harvesting is labor intensive, repetitive, and time sensitive, but hard to automate. Ripe fruit has to be found, reached through foliage, detached, and handled without bruising. One approach that has reached industry grasps and cuts the pedicel (the stem). It demands vision that can find a 2 mm green stem against green leaves, plus precise approach paths, and it is largely limited to tabletop growing. One system is reported at about &pound;30,000 plus a recurring subscription, which is hard to justify economically.</p>
+    <p>I wanted to explore a simpler "grab-around" strategy inspired by how people pick: the hand forms a loose cage around the berry so the pedicel slides between the fingers and nothing compresses the fruit. Pulling then tightens the pedicel, lines the berry up with the pull, and loads the natural abscission zone where the fruit is designed to separate.</p>
+    <p>Physical testing alone is slow and expensive, since every new end effector, stem, and sensor needs fabricating. So I built a simulation as an intermediate design filter. It does not replace testing on real strawberries. It narrows down which ideas are worth building.</p>
+
+    <h2>Simulation architecture</h2>
+    <p>Four configurable subsystems make up the testbed. The same scene can be re-run across fruit positions, stem parameters, detachment thresholds, and end-effector designs.</p>
+
+    <h3>1. Realistic crop environment</h3>
+    <p>The scene models a raised-bed plasticulture field, a common commercial setup in California, which produces roughly 90% of U.S. fresh strawberries. Bed dimensions follow published plasticulture guides (about 8 to 10 in high and 28 to 30 in wide at the base). Bed height, leaf occlusion, and berry orientation all shape how a robot can approach the fruit, so they matter for more than looks. The same environment can later support camera-based detection and path planning.</p>
+
+    <h3>2. Semi-deformable stem</h3>
+    <p>A rigid stem would not swing or transmit force the way a real pedicel does. The stem is instead a chain of short rigid links joined by ball joints with configurable spring and damping behavior. Link count, length, diameter, joint range, stiffness, and damping can all be changed without rebuilding the model, trading simulation speed against fidelity.</p>
+    <figure class="figure">
+      <img src="assets/strawberry/stem-model.jpg" alt="Webots screenshot of a strawberry hanging from a curved chain of rigid green stem links, with a force arrow reading 0.199928 N" />
+      <figcaption>The stem as a chain of rigid bodies connected by ball joints, with the fruit's contact force shown.</figcaption>
+    </figure>
+
+    <h3>3. Connector-based fruit abscission</h3>
+    <p>A Webots Connector holds the fruit to the end of the stem until a configurable tensile or shear threshold is exceeded. That approximates detachment without a tissue-fracture model. Placing a connector between every stem segment would let failure happen at the weakest point instead of a fixed location.</p>
+    <div class="figure-grid four">
+      <figure class="figure"><img src="assets/strawberry/abscission-1.jpg" alt="Fruit hanging slack from the plant" loading="lazy" /><figcaption>Slack</figcaption></figure>
+      <figure class="figure"><img src="assets/strawberry/abscission-2.jpg" alt="Fruit pulled outward with the stem beginning to straighten" loading="lazy" /><figcaption>Pulled</figcaption></figure>
+      <figure class="figure"><img src="assets/strawberry/abscission-3.jpg" alt="Stem pulled taut with a 2.9 N force reading" loading="lazy" /><figcaption>Taut</figcaption></figure>
+      <figure class="figure"><img src="assets/strawberry/abscission-4.jpg" alt="Fruit detached from the stem" loading="lazy" /><figcaption>Detached</figcaption></figure>
+    </div>
+    <p class="caption">The stem goes taut under a pulling load, and the fruit detaches once the load exceeds the connector's failure threshold.</p>
+
+    <h3>4. Distributed force-sensing strawberry</h3>
+    <p>The berry carries 100 force sensors spread around its surface, each recording a 3D force vector at a known location. Sensor count, spacing, offset, size, and contact material are configurable, so sensing can be concentrated where an end effector will touch, such as around the calyx for a grab-around design. Force data is visualized as 3D force maps and force-time plots, so you can see where, when, and how hard a berry is contacted, not just whether the pick succeeded.</p>
+    <div class="figure-grid three">
+      <figure class="figure"><img src="assets/strawberry/sensor-berry.png" alt="Strawberry model covered in blue force-sensor markers" loading="lazy" /><figcaption>100 sensors on the berry</figcaption></figure>
+      <figure class="figure"><img src="assets/strawberry/force-map.png" alt="3D scatter plot of sensor positions colored by relative force" loading="lazy" /><figcaption>Live 3D force map</figcaption></figure>
+      <figure class="figure"><img src="assets/strawberry/force-time.png" alt="Line chart of total and maximum local force over time after a small drop" loading="lazy" /><figcaption>Force over time after a small drop</figcaption></figure>
+    </div>
+
+    <h2>Showing the model is tunable</h2>
+    <p>I ran two parameter sweeps, changing one parameter at a time on a fixed geometry. The goal was not biological accuracy. It was to confirm the model responds predictably to stiffness and damping, so it can later be fitted to measured plant behavior. A fruit-stem system is a coupled multi-body spring-damper system, so settling time depends on mass, geometry, stiffness, damping, and more, not on damping alone.</p>
+    <figure class="figure">
+      <img src="assets/strawberry/stem-shape.jpg" alt="3D plot of the stem's shape at successive moments in time as it swings and settles" loading="lazy" />
+      <figcaption>Stem shape over time in one trial. The linked-body stem bends and swings rather than moving as a single rigid object.</figcaption>
+    </figure>
+
+    <h3>Damping sweep (stiffness k = 0.005)</h3>
+    <p>Low damping gave large, sustained oscillations after the fruit dropped under gravity. Higher damping shortened them, while the final resting displacement stayed near -0.163 m in every case.</p>
+    <figure class="figure narrow">
+      <img src="assets/strawberry/damping-sweep.png" alt="Five stacked plots of fruit displacement over time for increasing damping values" loading="lazy" />
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Damping c</th><th>Final disp. (m)</th><th>Post-1 s peak-to-peak (m)</th><th>5 mm settling time (s)</th></tr></thead>
+        <tbody>
+          <tr><td>0.0005</td><td>-0.1632</td><td>0.0891</td><td>11.92</td></tr>
+          <tr><td>0.001</td><td>-0.1631</td><td>0.0710</td><td>6.86</td></tr>
+          <tr><td>0.005</td><td>-0.1631</td><td>0.0121</td><td>1.79</td></tr>
+          <tr><td>0.01</td><td>-0.1631</td><td>0.0057</td><td>1.02</td></tr>
+          <tr><td>0.02</td><td>-0.1629</td><td>0.0076</td><td>1.31</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Stiffness sweep (damping c = 0.002)</h3>
+    <p>Stiffness changed where the fruit rests. Going from k = 0.0005 to k = 0.05 moved the final displacement from about -0.1677 m to -0.1411 m, a 26.6 mm reduction in sag. The dynamic response changed too, which means stiffness and damping have to be tuned together.</p>
+    <figure class="figure narrow">
+      <img src="assets/strawberry/spring-sweep.png" alt="Seven stacked plots of fruit displacement over time for increasing spring stiffness" loading="lazy" />
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Stiffness k</th><th>Final disp. (m)</th><th>Post-1 s peak-to-peak (m)</th><th>5 mm settling time (s)</th></tr></thead>
+        <tbody>
+          <tr><td>0.0005</td><td>-0.1677</td><td>0.0419</td><td>3.50</td></tr>
+          <tr><td>0.001</td><td>-0.1672</td><td>0.0422</td><td>3.51</td></tr>
+          <tr><td>0.0025</td><td>-0.1656</td><td>0.0428</td><td>3.52</td></tr>
+          <tr><td>0.005</td><td>-0.1631</td><td>0.0420</td><td>4.24</td></tr>
+          <tr><td>0.01</td><td>-0.1592</td><td>0.0429</td><td>4.23</td></tr>
+          <tr><td>0.025</td><td>-0.1510</td><td>0.0526</td><td>5.54</td></tr>
+          <tr><td>0.05</td><td>-0.1411</td><td>0.0632</td><td>5.99</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Why it matters</h2>
+    <ul>
+      <li><strong>More meaningful end-effector tests.</strong> A cage-style gripper can look fine on a stationary berry and fail when the berry swings away. Tuning stem behavior lets one design be tested across a range of plausible plants.</li>
+      <li><strong>Simpler, cheaper robots.</strong> If a simple mechanism detaches berries with acceptable force across plausible stem parameters, it earns physical development. If it fails, the failure mode shows up before any fabrication cost.</li>
+    </ul>
+
+    <h2>Limitations and next steps</h2>
+    <ul>
+      <li>The stem is rigid links with spring-damper joints, not continuous tissue, and abscission is a threshold approximation. The sensors measure local force but do not model bruising or tissue failure.</li>
+      <li>Next is calibration: measure real stem displacement, damping, and detachment force, fit the simulated constants to them, and relate force readings to physical damage risk.</li>
+      <li>After that, compare cage-style, suction, cutting, twisting, angled-pull, and gripping end effectors on shared metrics: detachment success, peak and total force, force distribution, cycle time, and sensitivity to stem parameters and berry orientation.</li>
+    </ul>
+
+    <ul class="tags"><li>Webots</li><li>Simulation</li><li>Physics Modeling</li><li>Agricultural Robotics</li><li>Force Sensing</li><li>Data Visualization</li></ul>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Miles Morrison</p>
+  </footer>
+</body>
+</html>
