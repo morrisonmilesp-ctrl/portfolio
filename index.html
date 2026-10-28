@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Name | Software Engineer</title>
-  <meta name="description" content="Portfolio of Your Name, software engineer. Projects, experience, and contact info." />
-  <meta property="og:title" content="Your Name | Software Engineer" />
-  <meta property="og:description" content="Projects, experience, and contact info." />
+  <title>Miles Morrison | Robotics &amp; AI Engineer</title>
+  <meta name="description" content="Miles Morrison, robotics and AI engineer (Lafayette College '26). Computer vision, LLM-integrated robotics, and full-system integration. Led an 11-person team to build an AgTech robot." />
+  <meta property="og:title" content="Miles Morrison | Robotics &amp; AI Engineer" />
+  <meta property="og:description" content="I build robots and AI systems that work outside the lab. Computer vision, LLM-integrated control, and full-system integration." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/miles.png" />
   <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <a class="logo" href="#top">YN</a>
+    <a class="logo" href="#top">MM</a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
     <nav id="nav">
       <a href="#about">About</a>
@@ -28,21 +29,42 @@
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <p class="eyebrow">Hi, I'm</p>
-      <h1>Your Name</h1>
-      <p class="tagline">Software engineer who builds [what you build] for [who/what domain].</p>
-      <div class="cta">
-        <a class="btn primary" href="#projects">View my work</a>
-        <a class="btn" href="resume.pdf">Download resume</a>
+      <div class="hero-text">
+        <p class="eyebrow">Miles Morrison &middot; Robotics &amp; AI Engineer</p>
+        <h1>I build robots and AI that work outside the lab.</h1>
+        <p class="tagline">
+          Lafayette College '26 (B.S. Integrative Engineering, Robotics). I led an 11-person team
+          to build an AgTech robot with a 90% mAP50 vision model, and co-authored peer-reviewed
+          research on LLMs.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See my work</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
       </div>
+      <img class="hero-photo" src="assets/miles.png" alt="Miles Morrison working on a laptop at Lafayette College" />
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section class="stats" aria-label="Highlights">
+      <div><strong>90%</strong><span>mAP50 on a custom pest-detection model</span></div>
+      <div><strong>11</strong><span>engineers led on the senior design team</span></div>
+      <div><strong>800+</strong><span>LLM-generated questions in a published study</span></div>
+      <div><strong>850+</strong><span>hours as a volunteer EMT</span></div>
     </section>
 
     <!-- ABOUT -->
     <section id="about">
       <h2>About</h2>
       <p>
-        Two or three sentences: who you are, what you're strongest at, and what kind of role you want next.
-        Lead with impact, e.g. "I build backend systems that handle X and cut Y by Z%."
+        I'm a robotics engineer who works across the whole stack: mechanical design, electronics,
+        simulation, computer vision, and LLM integration. I like owning the hard, unglamorous
+        parts that make a system actually work, such as actuation, power, and full-system
+        integration.
+      </p>
+      <p>
+        I'm looking for roles in robotics, automation, and applied AI where I can take
+        systems from prototype to a working demonstration.
       </p>
     </section>
 
@@ -51,62 +73,101 @@
       <h2>Projects</h2>
       <div class="grid">
         <article class="card">
-          <h3>Project One</h3>
-          <p>One sentence on the problem, one on what you built, one on the result (numbers if you have them).</p>
-          <ul class="tags"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li></ul>
-          <div class="links">
-            <a href="https://github.com/your-username/project-one">Code</a>
-            <a href="https://example.com">Live demo</a>
-          </div>
+          <h3>AgTech Platform for Invasive Species Removal</h3>
+          <p class="meta">Senior Design &middot; Team Lead &middot; 2025 - 2026</p>
+          <ul>
+            <li>Led 11 engineers to build a platform that detects and removes invasive pests contaminating vineyard harvests, from alpha and beta prototypes to a final stakeholder demo.</li>
+            <li>Trained a YOLO 26 model on 4k+ curated images (12k annotations): 90% mAP50, 91.2% precision, 83% recall.</li>
+            <li>Designed a custom 80/20 rack-and-pinion actuator with a 12 in stroke, specced remote system power, and resolved all major integration errors.</li>
+          </ul>
+          <ul class="tags"><li>Computer Vision</li><li>YOLO</li><li>Roboflow</li><li>Fusion 360</li><li>Systems Integration</li></ul>
         </article>
 
         <article class="card">
-          <h3>Project Two</h3>
-          <p>Describe the problem, your approach, and the outcome.</p>
-          <ul class="tags"><li>TypeScript</li><li>React</li><li>AWS</li></ul>
-          <div class="links">
-            <a href="https://github.com/your-username/project-two">Code</a>
-          </div>
+          <h3>Robotic Strawberry Harvesting Simulation Testbed</h3>
+          <p class="meta">Robotics Course Final Project &middot; Spring 2026</p>
+          <ul>
+            <li>Built a configurable Webots testbed to evaluate harvesting strategies and end effectors before physical prototyping.</li>
+            <li>Modeled a semi-deformable stem, tunable fruit detachment, and a strawberry with 100 distributed 3D force sensors.</li>
+            <li>Validated tunability: higher damping cut settling time from 11.9 s to 1.0 s; higher stiffness reduced static sag by 26.6 mm.</li>
+          </ul>
+          <ul class="tags"><li>Webots</li><li>Simulation</li><li>Physics Modeling</li><li>Data Visualization</li></ul>
         </article>
 
         <article class="card">
-          <h3>Project Three</h3>
-          <p>Describe the problem, your approach, and the outcome.</p>
-          <ul class="tags"><li>Go</li><li>Docker</li></ul>
-          <div class="links">
-            <a href="https://github.com/your-username/project-three">Code</a>
-          </div>
+          <h3>LLM-Integrated Robotic Control</h3>
+          <p class="meta">Independent Study &middot; 2024</p>
+          <ul>
+            <li>Built an end-to-end Webots simulation that turns natural-language food orders into 7-DoF robotic arm control.</li>
+            <li>Developed an LLM-integrated state machine that chooses ingredients and parameterizes the sequence, timing, and duration of reusable behaviors.</li>
+            <li>Showed generalization through zero-shot tests on varied orders and dishes.</li>
+          </ul>
+          <ul class="tags"><li>LLMs</li><li>Robotic Arm</li><li>FSM</li><li>Webots</li></ul>
+        </article>
+
+        <article class="card">
+          <h3>LLM-Generated Programming Questions</h3>
+          <p class="meta">Peer-Reviewed Research &middot; 2024 - 2025</p>
+          <ul>
+            <li>Co-authored "Language Models for Generating Programming Questions with Varying Difficulty Levels" (European Public and Social Innovation Review).</li>
+            <li>Engineered prompts and a Python pipeline that generated 800+ questions across difficulty levels, then analyzed the dataset.</li>
+            <li>Presented at the 2025 National Conference on Undergraduate Research.</li>
+          </ul>
+          <ul class="tags"><li>Python</li><li>Prompt Engineering</li><li>LLMs</li><li>Data Analysis</li></ul>
+        </article>
+
+        <article class="card">
+          <h3>Custom FPV Racing Drones</h3>
+          <p class="meta">Personal Project &middot; 2023 - Present</p>
+          <ul>
+            <li>Design, build, tune, and fly custom 5 in FPV drones: component selection, soldering, flight controller setup, and PID tuning in Betaflight.</li>
+            <li>Repair crashes and design custom 3D-printed parts.</li>
+          </ul>
+          <ul class="tags"><li>Betaflight</li><li>PID Tuning</li><li>3D Printing</li><li>Electronics</li></ul>
         </article>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
     <section id="experience">
-      <h2>Experience</h2>
+      <h2>Experience &amp; Education</h2>
       <div class="timeline">
         <div class="entry">
-          <div class="when">2023 - Present</div>
+          <div class="when">Aug 2025 - May 2026</div>
           <div>
-            <h3>Job Title, Company</h3>
+            <h3>Senior Design Team Lead, Lafayette College</h3>
             <ul>
-              <li>Achievement with a measurable result (e.g. reduced API latency 40%).</li>
-              <li>Another achievement: what you did, how, and the impact.</li>
+              <li>Led an 11-member team through stakeholder outreach, fieldwork, prototyping, and a final demonstration.</li>
+              <li>Built tools to flag at-risk workstreams and took ownership of critical gaps: actuation, system power, and full-system integration.</li>
             </ul>
           </div>
         </div>
         <div class="entry">
-          <div class="when">2021 - 2023</div>
+          <div class="when">Apr 2024 - Nov 2025</div>
           <div>
-            <h3>Previous Title, Company</h3>
+            <h3>Research Assistant, Lafayette College</h3>
             <ul>
-              <li>Achievement with a measurable result.</li>
+              <li>Co-authored a peer-reviewed paper on using LLMs to generate Python questions for adaptive learning.</li>
+              <li>Ran the literature review, selected the model from benchmarks, and built the generation and analysis pipeline.</li>
             </ul>
           </div>
         </div>
         <div class="entry">
-          <div class="when">2017 - 2021</div>
+          <div class="when">Nov 2021 - Apr 2024</div>
           <div>
-            <h3>B.S. in Your Major, University</h3>
+            <h3>Volunteer EMT, South Orange Rescue Squad</h3>
+            <ul>
+              <li>Logged 850+ ambulance hours while in school, making fast, protocol-driven decisions in safety-critical situations alongside police, fire, and hospital teams.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="when">Aug 2022 - May 2026</div>
+          <div>
+            <h3>B.S. Integrative Engineering (Robotics), Lafayette College</h3>
+            <ul>
+              <li>Minor in Mathematics &middot; GPA 3.5 &middot; Clare Boothe Luce Ally Research Scholar</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -116,26 +177,28 @@
     <section id="skills">
       <h2>Skills</h2>
       <div class="skills">
-        <div><h3>Languages</h3><p>Python, TypeScript, Go, SQL</p></div>
-        <div><h3>Frameworks</h3><p>React, FastAPI, Node.js</p></div>
-        <div><h3>Tools &amp; Cloud</h3><p>AWS, Docker, Git, CI/CD</p></div>
+        <div><h3>Languages</h3><p>Python, C++/Arduino, MATLAB. Prior: Java, JavaScript, Processing, SystemVerilog, HTML/CSS</p></div>
+        <div><h3>AI &amp; Computer Vision</h3><p>LLM integration, prompt engineering, object detection, dataset development, model evaluation, image augmentation, regression, clustering, tree-based models</p></div>
+        <div><h3>Engineering</h3><p>Mechanical design and prototyping, robotic controls, electromechanical assembly and integration, testing and troubleshooting, physics-based simulation</p></div>
+        <div><h3>Software</h3><p>Scripting and workflow automation, data processing and analysis, web applications, automated web data collection, testing and debugging</p></div>
+        <div><h3>Tools</h3><p>Fusion 360, Webots, Roboflow, VS Code, LTspice, Betaflight, PrusaSlicer, UltiMaker Cura</p></div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
       <h2>Get in touch</h2>
-      <p>I'm open to [role type] opportunities. The best way to reach me is email.</p>
+      <p>I'm open to robotics, automation, and applied AI roles. Email is the best way to reach me.</p>
       <div class="cta">
-        <a class="btn primary" href="mailto:you@example.com">you@example.com</a>
-        <a class="btn" href="https://github.com/your-username">GitHub</a>
-        <a class="btn" href="https://linkedin.com/in/your-username">LinkedIn</a>
+        <a class="btn primary" href="mailto:morrisonmilesp@gmail.com">morrisonmilesp@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/miles-m-b112931a9">LinkedIn</a>
+        <a class="btn" href="https://github.com/morrisonmilesp-ctrl">GitHub</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; <span id="year"></span> Your Name</p>
+    <p>&copy; <span id="year"></span> Miles Morrison</p>
   </footer>
 </body>
 </html>

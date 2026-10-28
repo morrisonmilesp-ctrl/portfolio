@@ -54,10 +54,26 @@ nav a:hover { color: var(--text); text-decoration: none; }
 .nav-toggle { display: none; }
 
 /* Hero */
-.hero { padding-top: 6rem; padding-bottom: 5rem; }
+.hero {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center;
+  padding-top: 4rem; padding-bottom: 3rem;
+}
 .eyebrow { color: var(--accent); font-weight: 600; margin: 0; }
-.hero h1 { font-size: clamp(2.5rem, 7vw, 4rem); margin: .25rem 0 1rem; line-height: 1.1; }
-.tagline { font-size: 1.25rem; color: var(--muted); max-width: 36rem; }
+.hero h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); margin: .5rem 0 1rem; line-height: 1.1; }
+.tagline { font-size: 1.15rem; color: var(--muted); max-width: 36rem; }
+.hero-photo {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 30% 40%;
+  border-radius: 16px; border: 1px solid var(--border);
+}
+
+/* Stats */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem;
+  padding-top: 1rem; padding-bottom: 1rem;
+}
+.stats div { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.stats strong { display: block; font-size: 2rem; line-height: 1.1; color: var(--accent); }
+.stats span { color: var(--muted); font-size: .9rem; }
 
 /* Buttons */
 .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
@@ -78,6 +94,9 @@ nav a:hover { color: var(--text); text-decoration: none; }
 }
 .card:hover { transform: translateY(-3px); border-color: var(--accent); }
 .card p { color: var(--muted); margin: 0 0 1rem; flex: 1; }
+.card p.meta { flex: none; font-size: .85rem; margin: 0 0 .75rem; }
+.card ul:not(.tags) { margin: 0 0 1rem; padding-left: 1.1rem; color: var(--muted); font-size: .95rem; flex: 1; }
+.card li + li { margin-top: .4rem; }
 .tags { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
 .tags li { font-size: .8rem; padding: .15rem .6rem; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
 .links { display: flex; gap: 1rem; font-weight: 500; }
@@ -103,6 +122,8 @@ footer { text-align: center; color: var(--muted); border-top: 1px solid var(--bo
   }
   nav.open { display: flex; }
   .entry { grid-template-columns: 1fr; gap: .25rem; }
+  .hero { grid-template-columns: 1fr; gap: 2rem; padding-top: 2.5rem; }
+  .hero-photo { aspect-ratio: 1 / 1; order: -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

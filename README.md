@@ -5,7 +5,7 @@ A static, dependency-free engineering portfolio template (HTML, CSS, JS) with da
 ## Customize
 
 1. Edit `index.html`: replace every placeholder ("Your Name", `your-username`, `you@example.com`, project and job entries).
-2. Put your resume at `resume.pdf` in the repo root (or remove the button).
+2. To add a resume download, put the file at `resume.pdf` in the repo root and add a button linking to it in the hero.
 3. Tweak colors in the `:root` and `[data-theme="dark"]` blocks at the top of `styles.css`.
 
 ## Preview locally
