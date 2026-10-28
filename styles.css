@@ -96,6 +96,18 @@ nav a:hover { color: var(--text); text-decoration: none; }
 .project-page p { color: var(--muted); }
 .project-page strong { color: var(--text); }
 
+.soft-demo { background: #0d0f14; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 1.5rem 0 2rem; }
+.project-page .soft-demo h1 { color: #fff; text-align: left; margin: 0 0 .6rem; padding: 0; font-size: clamp(1.4rem, 3.4vw, 2.3rem); }
+.project-page .soft-demo .meta { color: #9aa1ae; text-align: left; margin: 0; padding: 0; font-size: .9rem; }
+.soft-demo { position: relative; }
+.soft-title { position: absolute; top: 2rem; right: 2rem; width: 44%; z-index: 1; pointer-events: none; }
+@media (max-width: 640px) {
+  .soft-title { position: static; width: auto; padding: 1.25rem 1.25rem 0; }
+}
+.soft-demo canvas { display: block; width: 100%; height: 820px; touch-action: none; }
+.soft-demo .soft-line { color: #fff; font-size: clamp(1.1rem, 2.6vw, 1.45rem); line-height: 1.35; text-align: center; margin: 0; padding: .5rem 1.5rem 0; }
+.soft-demo .soft-hint { color: #9aa1ae; text-align: center; font-size: .9rem; margin: 0; padding: .4rem 1.5rem 1.25rem; }
+
 .figure { margin: 1.5rem 0; }
 .figure img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--border); background: #fff; }
 .figure figcaption, .caption { margin-top: .5rem; font-size: .85rem; color: var(--muted); }
