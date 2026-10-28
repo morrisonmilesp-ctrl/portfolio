@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name | Software Engineer</title>
+  <meta name="description" content="Portfolio of Your Name, software engineer. Projects, experience, and contact info." />
+  <meta property="og:title" content="Your Name | Software Engineer" />
+  <meta property="og:description" content="Projects, experience, and contact info." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#top">YN</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <nav id="nav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">&#9680;</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow">Hi, I'm</p>
+      <h1>Your Name</h1>
+      <p class="tagline">Software engineer who builds [what you build] for [who/what domain].</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">View my work</a>
+        <a class="btn" href="resume.pdf">Download resume</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        Two or three sentences: who you are, what you're strongest at, and what kind of role you want next.
+        Lead with impact, e.g. "I build backend systems that handle X and cut Y by Z%."
+      </p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Project One</h3>
+          <p>One sentence on the problem, one on what you built, one on the result (numbers if you have them).</p>
+          <ul class="tags"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li></ul>
+          <div class="links">
+            <a href="https://github.com/your-username/project-one">Code</a>
+            <a href="https://example.com">Live demo</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Project Two</h3>
+          <p>Describe the problem, your approach, and the outcome.</p>
+          <ul class="tags"><li>TypeScript</li><li>React</li><li>AWS</li></ul>
+          <div class="links">
+            <a href="https://github.com/your-username/project-two">Code</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Project Three</h3>
+          <p>Describe the problem, your approach, and the outcome.</p>
+          <ul class="tags"><li>Go</li><li>Docker</li></ul>
+          <div class="links">
+            <a href="https://github.com/your-username/project-three">Code</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="entry">
+          <div class="when">2023 - Present</div>
+          <div>
+            <h3>Job Title, Company</h3>
+            <ul>
+              <li>Achievement with a measurable result (e.g. reduced API latency 40%).</li>
+              <li>Another achievement: what you did, how, and the impact.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="when">2021 - 2023</div>
+          <div>
+            <h3>Previous Title, Company</h3>
+            <ul>
+              <li>Achievement with a measurable result.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="when">2017 - 2021</div>
+          <div>
+            <h3>B.S. in Your Major, University</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div><h3>Languages</h3><p>Python, TypeScript, Go, SQL</p></div>
+        <div><h3>Frameworks</h3><p>React, FastAPI, Node.js</p></div>
+        <div><h3>Tools &amp; Cloud</h3><p>AWS, Docker, Git, CI/CD</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Get in touch</h2>
+      <p>I'm open to [role type] opportunities. The best way to reach me is email.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:you@example.com">you@example.com</a>
+        <a class="btn" href="https://github.com/your-username">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/your-username">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Your Name</p>
+  </footer>
+</body>
+</html>
