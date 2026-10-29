@@ -35,24 +35,6 @@
       <p class="soft-hint" id="soft-hint" aria-live="polite">Pick the strawberry.</p>
     </div>
 
-    <p class="lead">A configurable simulation testbed for comparing robotic strawberry harvesting strategies and end effectors before anyone builds a physical prototype.</p>
-
-    <div class="cta">
-      <a class="btn primary" href="assets/strawberry/poster.pdf">View poster (PDF, 24 MB)</a>
-    </div>
-
-    <figure class="figure">
-      <img src="assets/strawberry/sim-field.jpg" alt="Simulated strawberry plant with flowers and two berries hanging over a raised bed in Webots" />
-      <figcaption>The simulated crop environment: a strawberry plant over a raised bed, with fruit on flexible stems.</figcaption>
-    </figure>
-
-    <div class="glance">
-      <div><strong>4</strong><span>configurable subsystems</span></div>
-      <div><strong>100</strong><span>force sensors on the berry</span></div>
-      <div><strong>11.9 s &rarr; 1.0 s</strong><span>settling time as damping rises</span></div>
-      <div><strong>26.6 mm</strong><span>less fruit sag from higher stiffness</span></div>
-    </div>
-
     <h2>The problem</h2>
     <p>Strawberry harvesting is labor intensive, repetitive, and time sensitive, but hard to automate. Ripe fruit has to be found, reached through foliage, detached, and handled without bruising. One approach that has reached industry grasps and cuts the pedicel (the stem). It demands vision that can find a 2 mm green stem against green leaves, plus precise approach paths, and it is largely limited to tabletop growing. One system is reported at about &pound;30,000 plus a recurring subscription, which is hard to justify economically.</p>
     <p>I wanted to explore a simpler "grab-around" strategy inspired by how people pick: the hand forms a loose cage around the berry so the pedicel slides between the fingers and nothing compresses the fruit. Pulling then tightens the pedicel, lines the berry up with the pull, and loads the natural abscission zone where the fruit is designed to separate.</p>
