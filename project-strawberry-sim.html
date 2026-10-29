@@ -7,9 +7,9 @@
   <meta name="description" content="A configurable Webots simulation architecture for testing robotic strawberry harvesting strategies and end effectors before physical prototyping." />
   <meta property="og:title" content="Simulation Architecture for Strawberry Harvesting End Effectors" />
   <meta property="og:image" content="assets/strawberry/thumb.jpg" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <script src="script.js" defer></script>
-  <script src="soft-stem.js" defer></script>
+  <script src="soft-stem.js?v=4" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -32,8 +32,7 @@
         <p class="meta">Robotics Course Final Project &middot; Lafayette College &middot; Spring 2026 &middot; Webots</p>
       </div>
       <canvas id="soft-canvas" role="img" aria-label="Interactive 2D line drawing of a strawberry plant on a raised bed, with a stem of rigid pill-shaped links running over the bed's edge and a strawberry lying on the slope. Drag the strawberry to pull it; force sensors light up where you touch it, and it detaches at the abscission zone if pulled hard enough."></canvas>
-      <p class="soft-line">The real world is soft. Robotic design must respect this.</p>
-      <p class="soft-hint" id="soft-hint" aria-live="polite">Click and drag the strawberry. The sensors light up where you touch it.</p>
+      <p class="soft-hint" id="soft-hint" aria-live="polite">Pick the strawberry.</p>
     </div>
 
     <p class="lead">A configurable simulation testbed for comparing robotic strawberry harvesting strategies and end effectors before anyone builds a physical prototype.</p>

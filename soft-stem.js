@@ -7,19 +7,39 @@
 
   const N = 9;
   const BREAK_N = 10;
-  const FG = '#ffffff';
-  const BG = '#0d0f14';
-  const INK = 'rgba(13, 20, 32, 0.85)';
-  const CHIP = 'rgba(10, 16, 28, 0.74)';
-  const ZONE = '#ffffff';
-  const FORCE = '#ffffff';
+  let FG = '#ffffff', BG = '#0d0f14', RGB = '255, 255, 255', CHIP = 'rgba(13, 15, 20, 0.85)';
+  let MULCH = '#1a1d23', MULCH_LINE = '#8a93a3', GROUND = 'rgba(' + RGB + ', 0.05)';
+  const STAGES = [
+    'Pick the strawberry.',
+    "Pick again... Notice how the stem aligns with the pull vector and becomes taut, applying a tensile force through it until it fails at the strawberry's natural abscission zone.",
+    'Pick once more... Notice the contact forces where you grab, which affect what tissue must transmit that force.',
+    'These dynamics are the basis of my simulation architecture and integral to my proposed end-effector and picking strategy.',
+  ];
+  let picks = 0;
+
+  function setHint() {
+    if (hint) hint.textContent = STAGES[Math.min(picks, STAGES.length - 1)];
+  }
+
+  function readTheme() {
+    const cs = getComputedStyle(document.body);
+    const fg = cs.color.match(/\d+/g) || [255, 255, 255];
+    const bg = cs.backgroundColor.match(/\d+/g) || [15, 17, 21];
+    FG = `rgb(${fg[0]}, ${fg[1]}, ${fg[2]})`;
+    BG = `rgb(${bg[0]}, ${bg[1]}, ${bg[2]})`;
+    RGB = `${fg[0]}, ${fg[1]}, ${fg[2]}`;
+    CHIP = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, 0.85)`;
+    const dark = (+bg[0] + +bg[1] + +bg[2]) / 3 < 128;
+    MULCH = dark ? '#1a1d23' : '#e3e6eb';
+    MULCH_LINE = dark ? '#8a93a3' : '#7b8494';
+    GROUND = `rgba(${RGB}, 0.05)`;
+  }
   const DT = 1 / 120;
   const SPRING = 0.03;
   const DAMPING = 0.3;
   const ITER = 24;
   const FRICTION = 0.92;
   const SIGMA = 0.42;
-  const HINT_START = 'Click and drag the strawberry. The sensors light up where you touch it.';
 
   const sensors = [];
   for (let row = 0; row < 7; row++) {
@@ -42,7 +62,9 @@
   let visible = true, running = false, last = 0, acc = 0;
 
   function resize() {
-    const w = Math.max(280, Math.round(canvas.getBoundingClientRect().width));
+    canvas.style.display = 'block';
+    canvas.style.width = '100%';
+    const w = Math.max(280, Math.round(canvas.parentElement.clientWidth));
     if (W === w) return;
     W = w;
     s = Math.min(1, W / 760);
@@ -91,7 +113,7 @@
     angle = Math.atan2(pts[N + 1].y - pts[N].y, pts[N + 1].x - pts[N].x);
     spin = 0;
     resetAt = 0;
-    if (hint) hint.textContent = grabbedOnce ? 'Grab it again and pull.' : HINT_START;
+    setHint();
   }
 
   function collide(p, r) {
@@ -213,7 +235,8 @@
     const c = pts[N + 1], q = prev[N + 1];
     spin = Math.max(-0.06, Math.min(0.06, (c.x - q.x) * 0.02));
     resetAt = t + 2400;
-    if (hint) hint.textContent = 'Released at the abscission zone. Watch the stem recoil.';
+    picks++;
+    setHint();
   }
 
   function roundRectPath(x, y, w, h, r) {
@@ -253,7 +276,7 @@
     ctx.strokeStyle = FG;
     ctx.lineWidth = Math.max(1.25, 1.75 * s);
     ctx.stroke();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.strokeStyle = 'rgba(' + RGB + ', 0.5)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, 0);
@@ -332,7 +355,7 @@
     const ex = G.x + ux * len, ey = G.y + uy * len;
     ctx.globalAlpha = Math.min(1, fN / 0.15);
     ctx.lineWidth = Math.max(2, 2.6 * s);
-    ctx.strokeStyle = FORCE;
+    ctx.strokeStyle = FG;
     ctx.beginPath();
     ctx.moveTo(G.x, G.y);
     ctx.lineTo(ex, ey);
@@ -352,17 +375,17 @@
     ctx.fillStyle = BG;
     ctx.fillRect(0, 0, W, H);
 
-    ctx.fillStyle = '#12151b';
+    ctx.fillStyle = GROUND;
     ctx.fillRect(0, groundY, W, H - groundY);
     ctx.lineCap = 'round';
     ctx.lineWidth = lw;
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.strokeStyle = 'rgba(' + RGB + ', 0.55)';
     ctx.beginPath();
     ctx.moveTo(0, groundY);
     ctx.lineTo(W, groundY);
     ctx.stroke();
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.strokeStyle = 'rgba(' + RGB + ', 0.5)';
     for (let x = bx + run + 24 * s; x < W; x += 46 * s) {
       ctx.beginPath();
       for (const [dx, h, lean] of [[-4, 22, -5], [0, 30, 1], [4, 20, 6]]) {
@@ -378,10 +401,10 @@
     ctx.lineTo(bx, bedTop);
     ctx.lineTo(bx + run, groundY);
     ctx.closePath();
-    ctx.fillStyle = '#17191d';
+    ctx.fillStyle = MULCH;
     ctx.fill();
     ctx.lineWidth = lw;
-    ctx.strokeStyle = '#8a93a3';
+    ctx.strokeStyle = MULCH_LINE;
     ctx.stroke();
   }
 
@@ -390,16 +413,16 @@
     ctx.save();
     ctx.translate(P.x, P.y);
     ctx.rotate(u + Math.PI / 2);
-    ctx.shadowColor = '#ffffff';
+    ctx.shadowColor = FG;
     ctx.shadowBlur = (4 + 6 * tension + 3 * pulse) * s;
     roundRectPath(-11 * s, -3.5 * s, 22 * s, 7 * s, 3.5 * s);
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = FG;
     ctx.fill();
     ctx.shadowBlur = 0;
     ctx.lineWidth = Math.max(1.5, 2 * s);
     ctx.strokeStyle = BG;
     ctx.stroke();
-    ctx.strokeStyle = ZONE;
+    ctx.strokeStyle = FG;
     ctx.globalAlpha = 0.6 + 0.4 * pulse;
     ctx.lineWidth = Math.max(1.25, 1.5 * s);
     ctx.setLineDash([3 * s, 3 * s]);
@@ -440,7 +463,7 @@
         lit = Math.exp(-d2 / (2 * SIGMA * SIGMA)) * press;
       }
       if (lit > 0.2) {
-        ctx.shadowColor = '#ffffff';
+        ctx.shadowColor = FG;
         ctx.shadowBlur = 12 * s;
       } else {
         ctx.shadowBlur = 0;
@@ -481,6 +504,7 @@
   }
 
   function draw(t) {
+    readTheme();
     ctx.clearRect(0, 0, W, H);
     const lw = Math.max(1.25, 1.75 * s);
     const fs = Math.max(12, Math.round(19 * s));
@@ -532,7 +556,7 @@
     if (!grabbedOnce && attached) {
       ctx.globalAlpha = reduceMotion ? 0.8 : 0.55 + 0.35 * Math.sin(t / 300);
       ctx.strokeStyle = FG;
-      ctx.shadowColor = INK;
+      ctx.shadowColor = BG;
       ctx.shadowBlur = 4;
       ctx.lineWidth = Math.max(1.5, 2 * s);
       ctx.setLineDash([4 * s, 5 * s]);
@@ -550,10 +574,10 @@
     if (dragging && attached) {
       ctx.beginPath();
       ctx.arc(ptr.x, ptr.y, 5 * s, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = FG;
       ctx.fill();
       ctx.lineWidth = 1.5;
-      ctx.strokeStyle = INK;
+      ctx.strokeStyle = BG;
       ctx.stroke();
     }
   }
@@ -616,7 +640,6 @@
     grabbedOnce = true;
     canvas.setPointerCapture(e.pointerId);
     canvas.style.cursor = 'grabbing';
-    if (hint) hint.textContent = 'Keep pulling. The stem flexes and the fruit lets go at about 10 N.';
   });
 
   canvas.addEventListener('pointermove', (e) => {
@@ -629,7 +652,6 @@
     if (!dragging) return;
     dragging = false;
     canvas.style.cursor = 'default';
-    if (hint && attached) hint.textContent = 'Grab it again and pull.';
   };
   canvas.addEventListener('pointerup', release);
   canvas.addEventListener('pointercancel', release);
